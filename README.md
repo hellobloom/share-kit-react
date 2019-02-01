@@ -4,7 +4,7 @@
 
 React wrapper for [Share Kit](https://github.com/hellobloom/share-kit#readme)
 
-- [Share Kit](#share-kit)
+- [Share Kit React](#share-kit-react)
   - [Installation](#installation)
   - [Usage](#usage)
   - [More](#more)
@@ -17,23 +17,41 @@ npm install --save @bloomprotocol/share-kit-react
 
 ## Usage
 
+`RequestElement` will render a QR code or button based on the client's platform. By defualt it will render a button when the client is mobile or tablet and on iOS.
+
 ```tsx
+import * as React from 'react'
+import {renderRequestElement, RequestData, QROptions} from '@bloomprotocol/share-kit-react'
+
 const requestData: RequestData = {...}
-const qrOptions: QROptions = {
+
+<RequestElement requestData={requestData} />
+
+// Setting QR Options
+
+const qrOptions: Partial<QROptions> = {
   size: 200,
 }
 
-<RequestElement requestData={requestData} {...qrOptions} />
-
-/// Overriding shouldRenderButton
 <RequestElement
   requestData={requestData}
-  {...qrOptions}
+  qrOptions={qrOptions}
+/>
+
+// Overriding shouldRenderButton
+<RequestElement
+  requestData={requestData}
   shouldRenderButton={(parsedResult) => {
     if (parsedResult.platform.type === 'mobile') return true
 
     return false
   }}
+/>
+
+// Passing props to the container
+<RequestElement
+  requestData={requestData}
+  className="request-element-container"
 />
 ```
 

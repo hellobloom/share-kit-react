@@ -7,8 +7,9 @@ import {
   RequestElementResult,
 } from '@bloomprotocol/share-kit'
 
-type RequestElementProps = Partial<QROptions> & {
+type RequestElementProps = {
   requestData: RequestData
+  qrOptions?: Partial<QROptions>
   shouldRenderButton?: ShouldRenderButton
 }
 
@@ -25,21 +26,21 @@ class RequestElement extends React.Component<RequestElementProps> {
   componentDidMount() {
     if (!this.containerRef.current) return
 
-    const {requestData, shouldRenderButton, ...qrOptions} = this.props
+    const {requestData, shouldRenderButton, qrOptions} = this.props
     this.requestElementResult = renderRequestElement(
       this.containerRef.current,
       requestData,
-      qrOptions,
+      qrOptions || {},
       shouldRenderButton
     )
   }
 
   componentDidUpdate(prevProps: RequestElementProps) {
-    const {requestData: prevRequestData, shouldRenderButton: _, ...prevQROptions} = prevProps
-    const {requestData, shouldRenderButton: _2, ...qrOptions} = this.props
+    const {requestData: prevRequestData, qrOptions: prevQROptions} = prevProps
+    const {requestData, qrOptions} = this.props
 
-    if (prevRequestData !== requestData || prevQROptions !== requestData) {
-      this.requestElementResult.update(requestData, qrOptions)
+    if (prevRequestData !== requestData || prevQROptions !== qrOptions) {
+      this.requestElementResult.update(requestData, qrOptions || {})
     }
   }
 
@@ -48,7 +49,8 @@ class RequestElement extends React.Component<RequestElementProps> {
   }
 
   render() {
-    return <div ref={this.containerRef} />
+    const {requestData, shouldRenderButton, qrOptions, ...rest} = this.props
+    return <div {...rest} ref={this.containerRef} />
   }
 }
 
