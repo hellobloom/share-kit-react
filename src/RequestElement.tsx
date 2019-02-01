@@ -1,15 +1,21 @@
 import * as React from 'react'
-import {types, renderRequestElement} from '@bloomprotocol/share-kit'
+import {
+  renderRequestElement,
+  RequestData,
+  QROptions,
+  ShouldRenderButton,
+  RequestElementResult,
+} from '@bloomprotocol/share-kit'
 
 type RequestElementProps = {
-  requestData: types.RequestData
-  qrOptions?: Partial<types.QROptions>
-  shouldRenderButton?: types.ShouldRenderButton
+  requestData: RequestData
+  qrOptions?: Partial<QROptions>
+  shouldRenderButton?: ShouldRenderButton
 }
 
 class RequestElement extends React.Component<RequestElementProps> {
   private containerRef: React.RefObject<HTMLDivElement>
-  private requestElementResult: types.RequestElementResult
+  private requestElementResult: RequestElementResult
 
   constructor(props: RequestElementProps) {
     super(props)

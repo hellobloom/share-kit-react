@@ -1,4 +1,4 @@
-import {types, util} from '@bloomprotocol/share-kit'
+export * from '@bloomprotocol/share-kit/dist/src/types'
+export * from '@bloomprotocol/share-kit/dist/src/util'
 
-export {util, types}
 export {RequestElement, RequestElementProps} from './src/RequestElement'
