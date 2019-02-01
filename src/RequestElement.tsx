@@ -27,12 +27,12 @@ class RequestElement extends React.Component<RequestElementProps> {
     if (!this.containerRef.current) return
 
     const {requestData, shouldRenderButton, qrOptions} = this.props
-    this.requestElementResult = renderRequestElement(
-      this.containerRef.current,
+    this.requestElementResult = renderRequestElement({
+      container: this.containerRef.current,
       requestData,
-      qrOptions || {},
-      shouldRenderButton
-    )
+      qrOptions,
+      shouldRenderButton,
+    })
   }
 
   componentDidUpdate(prevProps: RequestElementProps) {
@@ -40,7 +40,7 @@ class RequestElement extends React.Component<RequestElementProps> {
     const {requestData, qrOptions} = this.props
 
     if (prevRequestData !== requestData || prevQROptions !== qrOptions) {
-      this.requestElementResult.update(requestData, qrOptions || {})
+      this.requestElementResult.update({requestData, qrOptions})
     }
   }
 

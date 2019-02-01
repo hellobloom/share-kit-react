@@ -15,7 +15,7 @@ class Logo extends React.Component {
         />
         <label>Hide center logo</label>
         <br />
-        <RequestElement requestData={this.props.requestData} hideLogo={this.state.hideLogo} />
+        <RequestElement requestData={this.props.requestData} qrOptions={{hideLogo: this.state.hideLogo}} />
       </div>
     )
   }

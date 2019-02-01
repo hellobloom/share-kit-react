@@ -18,9 +18,11 @@ const defaultData = {
 
 storiesOf('RequestElement', module)
   .add('Base', () => <RequestElement requestData={defaultData} />)
-  .add('Colors', () => <RequestElement requestData={defaultData} bgColor={'#EBF0F1'} fgColor={'#3C3C3D'} />)
+  .add('Colors', () => (
+    <RequestElement requestData={defaultData} qrOptions={{bgColor: '#EBF0F1', fgColor: '#3C3C3D'}} />
+  ))
   .add('Logo', () => <Logo requestData={defaultData} />)
-  .add('Size', () => <RequestElement requestData={defaultData} size={300} />)
+  .add('Size', () => <RequestElement requestData={defaultData} qrOptions={{size: 300}} />)
   .add('Updating', () => <Updating />)
   .add('Button', () => (
     <div style={{width: '335px'}}>
