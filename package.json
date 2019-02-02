@@ -19,7 +19,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
-    "@bloomprotocol/share-kit": "/Users/jace/workspaces/share-kit",
+    "@bloomprotocol/share-kit": "git+ssh://git@github.com/hellobloom/share-kit.git#42d9c2109de389fe26dd3d816f38e93c087bb3a6",
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
     "react": "^16.7.0",
