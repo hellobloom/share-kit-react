@@ -21,11 +21,15 @@ npm install --save @bloomprotocol/share-kit-react
 
 ```tsx
 import * as React from 'react'
-import {renderRequestElement, RequestData, QROptions} from '@bloomprotocol/share-kit-react'
+import {RequestElement, RequestData, QROptions} from '@bloomprotocol/share-kit-react'
 
 const requestData: RequestData = {...}
+const buttonCallbackUrl = 'https://mysite.com/bloom-callback'
 
-<RequestElement requestData={requestData} />
+<RequestElement
+  requestData={requestData}
+  buttonCallbackUrl={buttonCallbackUrl}
+/>
 
 // Setting QR Options
 
@@ -35,12 +39,14 @@ const qrOptions: Partial<QROptions> = {
 
 <RequestElement
   requestData={requestData}
+  buttonCallbackUrl={buttonCallbackUrl}
   qrOptions={qrOptions}
 />
 
 // Overriding shouldRenderButton
 <RequestElement
   requestData={requestData}
+  buttonCallbackUrl={buttonCallbackUrl}
   shouldRenderButton={(parsedResult) => {
     if (parsedResult.platform.type === 'mobile') return true
 
@@ -51,6 +57,7 @@ const qrOptions: Partial<QROptions> = {
 // Passing props to the container
 <RequestElement
   requestData={requestData}
+  buttonCallbackUrl={buttonCallbackUrl}
   className="request-element-container"
 />
 ```

@@ -21,7 +21,7 @@ class Updating extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <RequestElement requestData={this.getData()} />
+        <RequestElement {...this.props} requestData={this.getData()} />
         <button onClick={this.handleUpdate}>Update RequestQRCode</button>
       </React.Fragment>
     )
