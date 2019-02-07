@@ -18,7 +18,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
-    "@bloomprotocol/share-kit": "git+ssh://git@github.com/hellobloom/share-kit.git#00817aeed652806b070ea5ede4aa2b4ff5f937bf",
+    "@bloomprotocol/share-kit": "git+ssh://git@github.com/hellobloom/share-kit.git#be1149716d41126c915cb150c957d18b98046a53",
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
     "react": "^16.7.0",
