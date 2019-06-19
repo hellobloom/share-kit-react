@@ -3,6 +3,7 @@ import {
   renderRequestElement,
   RequestData,
   QROptions,
+  ButtonOptions,
   ShouldRenderButton,
   RequestElementResult,
 } from '@bloomprotocol/share-kit'
@@ -11,48 +12,60 @@ type RequestElementProps = {
   requestData: RequestData
   qrOptions?: Partial<QROptions>
   shouldRenderButton?: ShouldRenderButton
-  buttonCallbackUrl: string
+  buttonOptions: ButtonOptions
 }
 
 class RequestElement extends React.Component<RequestElementProps> {
-  private containerRef: React.RefObject<HTMLDivElement>
-  private requestElementResult: RequestElementResult
+  private container: HTMLDivElement | null
+  private requestElementResult: RequestElementResult | null
 
   constructor(props: RequestElementProps) {
     super(props)
 
-    this.containerRef = React.createRef()
+    this.container = null
+    this.requestElementResult = null
   }
 
   componentDidMount() {
-    if (!this.containerRef.current) return
+    if (!this.container) return
 
-    const {requestData, shouldRenderButton, qrOptions, buttonCallbackUrl} = this.props
+    const {requestData, shouldRenderButton, qrOptions, buttonOptions} = this.props
     this.requestElementResult = renderRequestElement({
-      container: this.containerRef.current,
+      container: this.container,
       requestData,
       qrOptions,
       shouldRenderButton,
-      buttonCallbackUrl,
+      buttonOptions,
     })
   }
 
   componentDidUpdate(prevProps: RequestElementProps) {
-    const {requestData: prevRequestData, qrOptions: prevQROptions, buttonCallbackUrl: prevButtonCallbackUrl} = prevProps
-    const {requestData, qrOptions, buttonCallbackUrl} = this.props
+    if (!this.requestElementResult) return
 
-    if (prevRequestData !== requestData || prevQROptions !== qrOptions || prevButtonCallbackUrl !== buttonCallbackUrl) {
-      this.requestElementResult.update({requestData, qrOptions, buttonCallbackUrl})
+    const {requestData: prevRequestData, qrOptions: prevQROptions, buttonOptions: prevButtonOptions} = prevProps
+    const {requestData, qrOptions, buttonOptions} = this.props
+
+    if (prevRequestData !== requestData || prevQROptions !== qrOptions || prevButtonOptions !== buttonOptions) {
+      this.requestElementResult.update({requestData, qrOptions, buttonOptions})
     }
   }
 
   componentWillUnmount() {
-    this.requestElementResult.remove()
+    if (this.requestElementResult) {
+      this.requestElementResult.remove()
+    }
   }
 
   render() {
-    const {requestData, shouldRenderButton, qrOptions, buttonCallbackUrl, ...rest} = this.props
-    return <div {...rest} ref={this.containerRef} />
+    const {requestData, shouldRenderButton, qrOptions, buttonOptions, ...rest} = this.props
+    return (
+      <div
+        {...rest}
+        ref={element => {
+          this.container = element
+        }}
+      />
+    )
   }
 }
 
