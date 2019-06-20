@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {RequestElement} from '../index'
+import {RequestElement} from '../src/index'
 
 class Logo extends React.Component {
   state = {hideLogo: false}

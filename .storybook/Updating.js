@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {RequestElement, Action} from '../index'
+import {RequestElement, Action} from '../src/index'
 
 class Updating extends React.Component {
   state = {counter: 0}

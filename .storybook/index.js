@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react'
 
 import {Logo} from './Logo'
 import {Updating} from './Updating'
-import {Action, RequestElement} from '../index'
+import {Action, RequestElement} from '../src/index'
 
 const defaultData = {
   action: Action.attestation,
@@ -19,21 +19,19 @@ const defaultData = {
 const buttonCallbackUrl = 'https://mysite.com/bloom-callback'
 
 storiesOf('RequestElement', module)
-  .add('Base', () => <RequestElement requestData={defaultData} buttonCallbackUrl={buttonCallbackUrl} />)
+  .add('Base', () => <RequestElement requestData={defaultData} buttonOptions={{callbackUrl: buttonCallbackUrl}} />)
   .add('Colors', () => (
     <RequestElement
       requestData={defaultData}
-      buttonCallbackUrl={buttonCallbackUrl}
+      buttonOptions={{callbackUrl: buttonCallbackUrl}}
       qrOptions={{bgColor: '#EBF0F1', fgColor: '#3C3C3D'}}
     />
   ))
-  .add('Logo', () => <Logo requestData={defaultData} buttonCallbackUrl={buttonCallbackUrl} />)
-  .add('Size', () => (
-    <RequestElement requestData={defaultData} buttonCallbackUrl={buttonCallbackUrl} qrOptions={{size: 300}} />
-  ))
-  .add('Updating', () => <Updating buttonCallbackUrl={buttonCallbackUrl} />)
+  .add('Logo', () => <Logo requestData={defaultData} buttonOptions={{callbackUrl: buttonCallbackUrl}} />)
+  .add('Size', () => <RequestElement requestData={defaultData} buttonOptions={{callbackUrl: buttonCallbackUrl}} qrOptions={{size: 300}} />)
+  .add('Updating', () => <Updating buttonOptions={{callbackUrl: buttonCallbackUrl}} />)
   .add('Button', () => (
     <div style={{width: '335px'}}>
-      <RequestElement requestData={defaultData} buttonCallbackUrl={buttonCallbackUrl} shouldRenderButton={() => true} />
+      <RequestElement requestData={defaultData} buttonOptions={{callbackUrl: buttonCallbackUrl}} shouldRenderButton={() => true} />
     </div>
   ))

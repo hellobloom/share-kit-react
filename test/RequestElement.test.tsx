@@ -1,9 +1,8 @@
 import * as React from 'react'
 import {render, cleanup} from 'react-testing-library'
-import * as shareKit from '@bloomprotocol/share-kit'
 
-import {RequestElement} from './RequestElement'
-import {Action, QROptions, RequestData} from '../'
+import {RequestElement} from '../src/RequestElement'
+import {Action, QROptions, RequestData} from '../src'
 
 const requestData: RequestData = {
   action: Action.attestation,
@@ -34,32 +33,34 @@ const qrOptions: Partial<QROptions> = {size: 300}
 describe('RequestElement', () => {
   afterEach(cleanup)
 
-  test('calls renderRequestElement with correct params', () => {
-    const shareKitSpy = jest.spyOn(shareKit, 'renderRequestElement')
-    const called: string[] = []
-
-    render(
+  test('renders correctly', () => {
+    const result = render(
       <RequestElement
         requestData={requestData}
-        buttonCallbackUrl={buttonCallbackUrl}
+        buttonOptions={{callbackUrl: buttonCallbackUrl}}
         qrOptions={qrOptions}
-        shouldRenderButton={() => {
-          called.push('shouldRenderButton')
-          return true
-        }}
-      />
+        shouldRenderButton={() => true}
+      />,
     )
 
-    expect(shareKitSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        container: expect.any(HTMLElement),
-        requestData: expect.objectContaining(requestData),
-        qrOptions: expect.objectContaining(qrOptions),
-        shouldRenderButton: expect.any(Function),
-      })
-    )
-    expect(called).toHaveLength(1)
-    expect(called).toContain('shouldRenderButton')
+    const search = result.container.querySelector('a')!.href.replace('https://bloom.co/download', '')
+    const urlParams = new URLSearchParams(search)
+
+    const requestParam = urlParams.get('request')
+    const callbackUrlParam = urlParams.get('callback-url')
+
+    if (typeof requestParam !== 'string' || typeof callbackUrlParam !== 'string') {
+      if (typeof requestParam !== 'string') {
+        fail(`requestParam is not set: ${urlParams}`)
+      }
+
+      if (typeof callbackUrlParam !== 'string') {
+        fail('callbackUrlParam is not set')
+      }
+    } else {
+      expect(JSON.parse(window.atob(requestParam))).toMatchSnapshot()
+      expect(callbackUrlParam).toMatchSnapshot()
+    }
   })
 
   describe('updates when', () => {
@@ -67,10 +68,10 @@ describe('RequestElement', () => {
       const result = render(
         <RequestElement
           requestData={requestData}
-          buttonCallbackUrl={buttonCallbackUrl}
+          buttonOptions={{callbackUrl: buttonCallbackUrl}}
           qrOptions={qrOptions}
           shouldRenderButton={() => true}
-        />
+        />,
       )
 
       const search = result.container.querySelector('a')!.href.replace('https://bloom.co/download', '')
@@ -94,10 +95,10 @@ describe('RequestElement', () => {
         result.rerender(
           <RequestElement
             requestData={requestData2}
-            buttonCallbackUrl={buttonCallbackUrl}
+            buttonOptions={{callbackUrl: buttonCallbackUrl}}
             qrOptions={qrOptions}
             shouldRenderButton={() => true}
-          />
+          />,
         )
 
         const search2 = result.container.querySelector('a')!.href.replace('https://bloom.co/download', '')
@@ -125,10 +126,10 @@ describe('RequestElement', () => {
       const result = render(
         <RequestElement
           requestData={requestData}
-          buttonCallbackUrl={buttonCallbackUrl}
+          buttonOptions={{callbackUrl: buttonCallbackUrl}}
           qrOptions={qrOptions}
           shouldRenderButton={() => true}
-        />
+        />,
       )
 
       const search = result.container.querySelector('a')!.href.replace('https://bloom.co/download', '')
@@ -152,10 +153,10 @@ describe('RequestElement', () => {
         result.rerender(
           <RequestElement
             requestData={requestData}
-            buttonCallbackUrl={buttonCallbackUrl2}
+            buttonOptions={{callbackUrl: buttonCallbackUrl2}}
             qrOptions={qrOptions}
             shouldRenderButton={() => true}
-          />
+          />,
         )
 
         const search2 = result.container.querySelector('a')!.href.replace('https://bloom.co/download', '')
