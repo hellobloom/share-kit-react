@@ -1,3 +1,14 @@
+## 4.1.0
+
+**Improvements**
+
+- Bump to latest [share-kit](https://github.com/hellobloom/share-kit) to include button variations
+- Add `React.HTMLAttributes<HTMLDivElement>` to `RequestElementProps` to support passing extra DOM props
+
+**Misc**
+
+- Update dev dependencies
+
 ## 4.0.0
 
 **Improvements**
