@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {render, cleanup} from 'react-testing-library'
+import {render, cleanup} from '@testing-library/react'
 
 import {RequestElement} from '../src/RequestElement'
 import {Action, QROptions, RequestData} from '../src'

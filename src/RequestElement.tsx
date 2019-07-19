@@ -8,7 +8,7 @@ import {
   RequestElementResult,
 } from '@bloomprotocol/share-kit'
 
-type RequestElementProps = {
+type RequestElementProps = React.HTMLAttributes<HTMLDivElement> & {
   requestData: RequestData
   qrOptions?: Partial<QROptions>
   shouldRenderButton?: ShouldRenderButton
