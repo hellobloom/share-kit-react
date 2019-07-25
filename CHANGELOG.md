@@ -1,3 +1,9 @@
+## 4.2.0
+
+**Improvements**
+
+- Bump to latest [share-kit](https://github.com/hellobloom/share-kit) to include updated text for `verify` buttons
+
 ## 4.1.0
 
 **Improvements**
