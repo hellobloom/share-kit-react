@@ -1,3 +1,9 @@
+## 4.2.1
+
+**Bug Fixes**
+
+- Fix uploaded dist
+
 ## 4.2.0
 
 **Improvements**
