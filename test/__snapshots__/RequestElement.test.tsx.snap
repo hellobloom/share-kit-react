@@ -84,7 +84,7 @@ Object {
     "phone",
     "email",
   ],
-  "url": "https://receive-kit.bloom.co/api/receive",
+  "url": "https://receive-kit.bloom.co/api/receive?share-kit-from=button",
 }
 `;
 

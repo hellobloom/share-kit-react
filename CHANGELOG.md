@@ -1,3 +1,9 @@
+## 4.2.2
+
+**Improvements**
+
+- Bump to latest [share-kit](https://github.com/hellobloom/share-kit) to fix appending to `requestData.url`
+
 ## 4.2.1
 
 **Bug Fixes**
