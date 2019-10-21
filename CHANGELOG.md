@@ -1,3 +1,9 @@
+## 4.3.0
+
+**Miscellaneous**
+
+- Consumes 7.3.0 share-kit package that adds an `onclick` handler to QR element to copy the request data as JSON to the clipboard.
+
 ## 4.2.2
 
 **Improvements**
