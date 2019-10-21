@@ -23,7 +23,7 @@
     "eslint-fix": "./bin/eslint --fix"
   },
   "dependencies": {
-    "@bloomprotocol/share-kit": "^7.2.2"
+    "@bloomprotocol/share-kit": "^7.3.0"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0"
